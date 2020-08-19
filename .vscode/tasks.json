@@ -6,6 +6,7 @@
             "command": "/usr/bin/clang++",
             "args": [
                 "${file}",
+                "Screen.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I", 

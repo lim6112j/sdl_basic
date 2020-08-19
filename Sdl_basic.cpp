@@ -1,13 +1,25 @@
 #include<iostream>
 #include<SDL2/SDL.h>
+#include "Screen.h"
 using namespace std;
 int main() {
-    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-        cout << "SDL init failed" << endl;
-        return 1;
+    
+    sdlBasic::Screen *screen;
+    screen->init();
+    bool quit = false;
+    SDL_Event event;
+    while (!quit)
+    {
+        // update particle
+        // draw particle
+        // check for message/events
+        while(SDL_PollEvent(&event)) {
+            if(event.type == SDL_QUIT){
+                quit = true;
+            }
+        }
     }
-    cout << "SDL init succeeded" << endl;
-    SDL_Quit();
+    screen->close();
     return 0;
 }
 
