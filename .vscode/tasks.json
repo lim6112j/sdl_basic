@@ -7,6 +7,8 @@
             "args": [
                 "${file}",
                 "Screen.cpp",
+                "Particle.cpp",
+                "Swarm.cpp",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-I", 
