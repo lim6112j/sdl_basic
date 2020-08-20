@@ -41,16 +41,18 @@ namespace sdlBasic
             return 4;
         }
         m_buffer = new Uint32[SCREEN_HEIGHT*SCREEN_WIDTH];
+        m_buffer2 = new Uint32[SCREEN_HEIGHT*SCREEN_WIDTH];
         memset(m_buffer, 0, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
+        memset(m_buffer2, 0, SCREEN_WIDTH*SCREEN_HEIGHT*sizeof(Uint32));
         // buffer[30000] = 0xFFFFFFFF;
-        for (int i = 0; i < SCREEN_HEIGHT*SCREEN_WIDTH; i++)
-        {
-            m_buffer[i] = 0x000000FF;
-        }
-        SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH*sizeof(Uint32));
-        SDL_RenderClear(m_renderer);
-        SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
-        SDL_RenderPresent(m_renderer);
+        // for (int i = 0; i < SCREEN_HEIGHT*SCREEN_WIDTH; i++)
+        // {
+        //     m_buffer[i] = 0x000000FF;
+        // }
+        // SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH*sizeof(Uint32));
+        // SDL_RenderClear(m_renderer);
+        // SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+        // SDL_RenderPresent(m_renderer);
         return true;
     };
     bool Screen::processEvents(){
@@ -76,6 +78,24 @@ namespace sdlBasic
         color += 0xFF;
         m_buffer[(y*SCREEN_WIDTH)+x] = color;
     }
+    void Screen::clear() {
+        memset(m_buffer, 0, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(Uint32));
+        memset(m_buffer2, 0, SCREEN_HEIGHT*SCREEN_WIDTH*sizeof(Uint32));
+    }
+    void Screen::boxBlur() {
+        Uint32 *temp = m_buffer;
+        m_buffer = m_buffer2;
+        m_buffer2 = temp;
+        for (int y = 0; y < SCREEN_HEIGHT; y++)
+        {
+            for (int x = 0; x < SCREEN_WIDTH; x++)
+            {
+                
+            }
+            
+        }
+        
+    }
     void Screen::update() {
         SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH*sizeof(Uint32));
         SDL_RenderClear(m_renderer);
@@ -84,6 +104,7 @@ namespace sdlBasic
     }
     void Screen::close(){
         delete [] m_buffer;
+        delete [] m_buffer2;
         SDL_DestroyRenderer(m_renderer);
         SDL_DestroyTexture(m_texture);
         SDL_DestroyWindow(m_window);

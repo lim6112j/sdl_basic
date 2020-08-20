@@ -9,4 +9,11 @@ namespace sdlBasic
        delete [] m_particles;
        std::cout << "swarm destoryed" << std::endl;
    }; 
+   void Swarm::update() {
+       for (int i = 0; i < Swarm::NPARTICLES; i++)
+       {
+           m_particles[i].update();
+       }
+       
+   }
 } // namespace sdlBasic

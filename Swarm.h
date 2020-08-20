@@ -12,6 +12,7 @@ namespace sdlBasic
     public:
         Swarm();
         virtual ~Swarm();
+        void update();
         const sdlBasic::Particle * const getParticle() {return m_particles;};
    };
 } // namespace sdlBasic
